@@ -1,6 +1,10 @@
+import Jumbotron from "./components/jumbotron";
+
 function App() {
   return (
-    <div></div>
+    <div>
+      <Jumbotron />
+    </div>
   );
 }
 
