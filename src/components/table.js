@@ -4,11 +4,11 @@ import EmployeeRow from "./employeeRow";
 function Table({ employeeData }) {
     console.log("table.js rendered, employeeData: ", employeeData)
 
-    const [employeeCards, setEmployeeCards] = useState([]);
+    const [employeeCards, setEmployeeCards] = useState();
 
     useEffect(() => {
-
-        if (employeeData) { generateCards() }
+        // Generate cards only if there are no cards and if there is data
+        if (employeeData && !employeeCards) { generateCards() }
     })
 
     const generateCards = () => {
