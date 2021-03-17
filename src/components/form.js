@@ -1,4 +1,11 @@
-function Form() {
+function Form({clearFilters}) {
+    // console.log("Form, clearFilters: ", clearFilters)
+
+    // const clearFilters = (e) => {
+    //     e.preventDefault();
+    //     console.log("I cleared the filters!")
+    // }
+
     return (
         <form className="p-3">
             <div className="form-group">
@@ -39,7 +46,7 @@ function Form() {
                 </div>
 
                 <div className="form-group col-sm my-1">
-                    <button type="submit" className="btn btn-primary">Clear Filters</button>
+                    <button onClick={clearFilters} className="btn btn-primary">Clear Filters</button>
                 </div>
 
             </div>

@@ -8,8 +8,8 @@ function Table({ employeeData }) {
 
     useEffect(() => {
         // Generate cards only if there are no cards and if there is data
-        if (employeeData && !employeeCards) { generateCards() }
-    })
+        if (employeeData) { generateCards() }
+    }, [employeeData])
 
     const generateCards = () => {
         let cards = [];

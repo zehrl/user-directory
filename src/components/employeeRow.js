@@ -1,7 +1,7 @@
-function EmployeeCard({ employeeData: { imgUrl, firstName, lastName, gender, age, city, state } }) {
+function EmployeeCard({ employeeData: { imgUrl, firstName, lastName, gender, age, city, state, hidden } }) {
 
     return (
-        <tr>
+        <tr className={hidden ? "d-none" : null}>
             <td><img src={imgUrl} alt="thumbnail of employee" /></td>
             <td>{firstName}</td>
             <td>{lastName}</td>

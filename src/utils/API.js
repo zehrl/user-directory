@@ -18,7 +18,8 @@ const API = {
                         gender: user.gender,
                         age: user.dob.age,
                         city: user.location.city,
-                        state: user.location.state
+                        state: user.location.state,
+                        hidden: false
                     }
                     
                     employees.push(formattedData);
