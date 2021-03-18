@@ -7,16 +7,18 @@ function Table({ employeeData }) {
     const [employeeCards, setEmployeeCards] = useState();
 
     useEffect(() => {
+        
         // Generate cards only if there are no cards and if there is data
+        console.log("employeeData? ", employeeData ? true : false);
         if (employeeData) { generateCards() }
     }, [employeeData])
 
     const generateCards = () => {
         let cards = [];
-
+        console.log("generating cards...");
         employeeData.forEach(employee => {
             cards.push(
-                <EmployeeRow employeeData={employee} />
+                <EmployeeRow employeeData={employee} key={employee.key}/>
             )
         })
 

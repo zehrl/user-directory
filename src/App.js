@@ -9,26 +9,27 @@ function App() {
   const [employees, setEmployees] = useState("");
 
   useEffect(() => {
+    console.log("useEffect() called!")
     if (!employees) {
       API
         .getEmployees(20)
         .then((data) => {
           console.log("Data sent to setEmployees: ", data)
           // sortBy(data, "firstName");
-          filterBy(data, "gender", "female");
+          // filterBy(data, "gender", "female");
+          setEmployees(data);
         })
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const sortBy = (data, column) => {
-    console.log("Before sortBy, data: ", data)
+  const sortBy = (column) => {
+    console.log("Before sortBy, data: ", employees)
+    console.log("Sorting by: ", column)
 
-    const sortedArray = data.sort((employee, nextEmployee) => {
-      console.log("employee[column]: ", employee[column]);
-      console.log("nextEmployee[column]: ", nextEmployee[column]);
-
+    const sortedArray = employees.sort((employee, nextEmployee) => {
+      console.log("Sort Loop")
       // Determine column type and sort accordingly
       if (typeof employee[column] === "number") {
 
@@ -46,22 +47,28 @@ function App() {
         }
       }
     });
-    
-    setEmployees(sortedArray)
-    
+
     console.log("sortedArray: ", sortedArray);
+
+    // setEmployees(sortedArray)
+
   };
-  
-  const filterBy = (data, column, value) => {
 
-    // const filteredArray = data.(employee => employee[column] === value)
+  const filterBy = (filters) => {
+    console.log("filterBy employees state: ", employees);
+    let filteredArray = employees;
+    console.log("filters: ", filters)
+    filters.forEach(({ column, value }) => {
 
-    const filteredArray = data.map(employee => {
-      if (employee[column] !== value) {
-        employee.hidden = true;
-      }
+      filteredArray = filteredArray.map(employee => {
+        console.log("Filter Loop")
+        if (employee[column] !== value) {
+          employee.hidden = true;
+        }
 
-      return employee;
+        return employee;
+      });
+
     });
 
     setEmployees(filteredArray);
@@ -71,8 +78,8 @@ function App() {
 
   const clearFilters = (event) => {
     console.log("clearFilters called.")
-    event.preventDefault();
-    
+    event.preventDefault()
+
     setEmployees(
       employees.map(employee => {
         employee.hidden = false;
@@ -85,8 +92,10 @@ function App() {
     <div>
       <Jumbotron />
       <div className="container">
-        <Form 
+        <Form
           clearFilters={clearFilters}
+          sortBy={sortBy}
+          filterBy={filterBy}
         />
         <Table
           employeeData={employees}

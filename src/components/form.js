@@ -1,22 +1,39 @@
-function Form({clearFilters}) {
-    // console.log("Form, clearFilters: ", clearFilters)
+import { useState } from "react";
 
-    // const clearFilters = (e) => {
-    //     e.preventDefault();
-    //     console.log("I cleared the filters!")
-    // }
+function Form({ clearFilters, sortBy, filterBy }) {
+
+    const [sortByValue, setSortByValue] = useState();
+    const [filterByGender, setFilterByGender] = useState();
+
+
+    function handleClearFilters(event) {
+        setFilterByGender();
+        clearFilters(event);
+    }
+    
+    function handleSortByChange(event) {
+        setSortByValue(event.target.value);
+        sortBy(event.target.value);
+    }
+
+    function handleFilterBy(event) {
+        clearFilters(event);
+
+        filterBy([{column: "gender", value: event.target.value}])
+    }
 
     return (
         <form className="p-3">
             <div className="form-group">
-                <label className="mr-2" for="inlineFormCustomSelectPref">Sort By:</label>
-                <select className="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                    <option value="1">First Name</option>
-                    <option value="2" selected>Last Name</option>
-                    <option value="3">Gender</option>
-                    <option value="4">Age</option>
-                    <option value="5">City</option>
-                    <option value="6">State</option>
+                <label className="mr-2" for="sortBy">Sort By:</label>
+                <select onChange={handleSortByChange} value={sortByValue} className="custom-select my-1 mr-sm-2" id="sortBy">
+                    <option disabled selected>Choose Column...</option>
+                    <option value="firstName">First Name</option>
+                    <option value="lastName">Last Name</option>
+                    <option value="gender">Gender</option>
+                    <option value="age">Age</option>
+                    <option value="city">City</option>
+                    <option value="state">State</option>
                 </select>
             </div>
 
@@ -24,10 +41,10 @@ function Form({clearFilters}) {
             <div className="form-row">
 
                 <div className="form-group col-sm">
-                    <select className="custom-select my-1 mr-sm-2" id="asdf">
+                    <select onChange={handleFilterBy} className="custom-select my-1 mr-sm-2" id="asdf">
                         <option disabled selected>Gender</option>
-                        <option value="1">Male</option>
-                        <option value="2">Female</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
                     </select>
                 </div>
 
@@ -46,7 +63,7 @@ function Form({clearFilters}) {
                 </div>
 
                 <div className="form-group col-sm my-1">
-                    <button onClick={clearFilters} className="btn btn-primary">Clear Filters</button>
+                    <button onClick={handleClearFilters} className="btn btn-primary">Clear Filters</button>
                 </div>
 
             </div>
