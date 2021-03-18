@@ -25,7 +25,7 @@ function Form({ clearFilters, sortBy, filterBy }) {
     return (
         <form className="p-3">
             <div className="form-group">
-                <label className="mr-2" for="sortBy">Sort By:</label>
+                <label className="mr-2" for="sortBy">Sort By: (Updates on filter change)</label>
                 <select onChange={handleSortByChange} value={sortByValue} className="custom-select my-1 mr-sm-2" id="sortBy">
                     <option disabled selected>Choose Column...</option>
                     <option value="firstName">First Name</option>
@@ -48,7 +48,7 @@ function Form({ clearFilters, sortBy, filterBy }) {
                     </select>
                 </div>
 
-                <div className="form-group col-sm">
+                {/* <div className="form-group col-sm">
                     <select className="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
                         <option disabled selected>City</option>
                         <option value="1">Seattle</option>
@@ -60,7 +60,7 @@ function Form({ clearFilters, sortBy, filterBy }) {
                         <option disabled selected>State</option>
                         <option value="1">Seattle</option>
                     </select>
-                </div>
+                </div> */}
 
                 <div className="form-group col-sm my-1">
                     <button onClick={handleClearFilters} className="btn btn-primary">Clear Filters</button>
